@@ -1,0 +1,33 @@
+description: >
+  Sample description
+# What will this job do?
+
+docker:
+  - image: cimg/base:current
+
+parameters:
+  sourceConnector:
+    type: string
+    description: "Slim Saas Connector ID"
+  sourceImage:
+    type: string
+    description: "Container to instrument.eg: library/node:latest"
+
+steps:
+  - checkout
+  - setup-dependencies
+  - cli-instrument:
+      sourceConnector: << parameters.sourceConnector >>
+      sourceImage: << parameters.sourceImage >>
+  - run:
+      name: Export ENV
+      command: cp $BASH_ENV bash.env
+  - persist_to_workspace:
+      root: .
+      paths:
+        - bash.env
+  - setup_remote_docker:
+      version: 20.10.14
+  - run-image:
+      sourceImage: << parameters.sourceImage >>
+  - cleanup
