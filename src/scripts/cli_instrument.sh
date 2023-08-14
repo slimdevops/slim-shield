@@ -1,9 +1,9 @@
 #!/bin/bash
-SOURCE_CONNECTOR_ID="${SOURCECONNECTOR}"
+SOURCE_CONNECTOR_ID="${CONNECTOR_ID}"
 echo "$SOURCE_CONNECTOR_ID"
 BASEIMAGE="${SOURCEIMAGE}"
 
-string="${SOURCECONNECTOR}/${SOURCEIMAGE}"
+string="${CONNECTOR_ID}/${SOURCEIMAGE}"
 
 
 match=$(echo "${string}" | grep -oP '^(?:([^/]+)/)?(?:([^/]+)/)?([^@:/]+)(?:[@:](.+))?$')
@@ -42,7 +42,7 @@ TARGET_CONNECTOR_ID="${CONNECTOR_ID}"
 
 log_output=$(slim instrument \
   --platform="$IMAGE_PLATFORM" \
-  --target-image-connector "$SOURCE_CONNECTOR_ID" \
+  --target-image-connector "$TARGET_CONNECTOR_ID" \
   --instrumented-image-connector "$TARGET_CONNECTOR_ID" \
   --instrumented-image "$PROJECT_IMAGE_INSTRUMENTED" \
   --hardened-image-connector "$TARGET_CONNECTOR_ID" \
