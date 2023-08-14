@@ -6,4 +6,4 @@ description: >
 steps:
   - run:
       name: Setup Dependencies
-      command: <<include(scripts/setup-dependencies.sh)>>
+      command: <<include(scripts/setup_dependencies.sh)>>

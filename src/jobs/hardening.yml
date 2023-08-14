@@ -7,10 +7,10 @@ docker:
 
 steps:
   - checkout
-  - setup-dependencies
+  - setup_dependencies
   - attach_workspace:
       at: .
   - run:
       name: Import ENV
       command: cat bash.env >> $BASH_ENV
-  - cli-harden
+  - cli_harden

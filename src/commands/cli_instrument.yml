@@ -15,4 +15,4 @@ steps:
       environment:
         SOURCECONNECTOR: << parameters.sourceConnector >>
         SOURCEIMAGE: << parameters.sourceImage >>
-      command: <<include(scripts/cli-instrument.sh)>>
+      command: <<include(scripts/cli_instrument.sh)>>

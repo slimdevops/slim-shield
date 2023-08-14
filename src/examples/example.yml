@@ -1,20 +1,21 @@
 description: >
-  This orb is used to Harden images.
+  The slim-shield is designed to enhance the security of your containerized
+  applications by implementing best practices for container hardening.
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.
 usage:
   version: 2.1
   orbs:
-    slim-harden-orb: slimdevops/slim-shield@0.0.1
+    slim-shield: slimdevops/slim-shield@0.0.1
   workflows:
     use-my-orb:
       jobs:
-        - slim-harden-orb/instrumentation:
+        - slim-shield/instrumentation:
             name: Instrumentation
             sourceConnector: dockerhub.public
             sourceImage: << namespace/repository:tag >>
-        - slim-harden-orb/hardening:
+        - slim-shield/hardening:
             name: Hardening
             requires:
               - Instrumentation

@@ -15,8 +15,8 @@ parameters:
 
 steps:
   - checkout
-  - setup-dependencies
-  - cli-instrument:
+  - setup_dependencies
+  - cli_instrument:
       sourceConnector: << parameters.sourceConnector >>
       sourceImage: << parameters.sourceImage >>
   - run:
@@ -28,6 +28,6 @@ steps:
         - bash.env
   - setup_remote_docker:
       version: 20.10.14
-  - run-image:
+  - run_image:
       sourceImage: << parameters.sourceImage >>
   - cleanup
