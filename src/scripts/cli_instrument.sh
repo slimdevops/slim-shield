@@ -1,9 +1,9 @@
 #!/bin/bash
-SOURCE_CONNECTOR_ID="${CONNECTOR_ID}"
-echo "$SOURCE_CONNECTOR_ID"
+SOURCE_CONNECTOR_ID="${SOURCE_CONNECTOR_ID}"
+
 BASEIMAGE="${SOURCEIMAGE}"
 
-string="${CONNECTOR_ID}/${SOURCEIMAGE}"
+string="${SOURCE_CONNECTOR_ID}/${SOURCEIMAGE}"
 
 
 match=$(echo "${string}" | grep -oP '^(?:([^/]+)/)?(?:([^/]+)/)?([^@:/]+)(?:[@:](.+))?$')
@@ -38,11 +38,11 @@ PROJECT_IMAGE_INSTRUMENTED="${namespace}/${repository}:${tag}.instrumented"
 PROJECT_IMAGE_SLIMMED="${namespace}/${repository}:${tag}.slimxx"
 BASEIMAGE="${namespace}/${repository}:${tag}"
 IMAGE_PLATFORM="linux/amd64"
-TARGET_CONNECTOR_ID="${CONNECTOR_ID}"
+TARGET_CONNECTOR_ID="${TARGET_CONNECTOR_ID}"
 
 log_output=$(slim instrument \
   --platform="$IMAGE_PLATFORM" \
-  --target-image-connector "$TARGET_CONNECTOR_ID" \
+  --target-image-connector "$SOURCE_CONNECTOR_ID" \
   --instrumented-image-connector "$TARGET_CONNECTOR_ID" \
   --instrumented-image "$PROJECT_IMAGE_INSTRUMENTED" \
   --hardened-image-connector "$TARGET_CONNECTOR_ID" \
