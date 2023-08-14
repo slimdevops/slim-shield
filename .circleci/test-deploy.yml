@@ -25,7 +25,6 @@ workflows:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - slim-shield/instrumentation:
           name: Instrumentation
-          sourceConnector: dockerhub.public
           sourceImage: sreejithfocaloid/node-example
       - slim-shield/hardening:
           name: Hardening
