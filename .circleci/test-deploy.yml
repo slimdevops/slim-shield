@@ -18,7 +18,25 @@ release-filters: &release-filters
     ignore: /.*/
   tags:
     only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
-
+jobs:
+  run-instrumented-container:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          name: Run Container
+          command: |
+            chmod +x ./src/scripts/run.sh
+            ./src/scripts/run.sh
+      - run:
+          name: Stop Container
+          command: |
+            chmod +x ./src/scripts/cleanup.sh
+            ./src/scripts/cleanup.sh
 workflows:
   test-deploy:
     jobs:
@@ -26,10 +44,14 @@ workflows:
       - slim-shield/instrumentation:
           name: Instrumentation
           sourceImage: sreejithfocaloid/node-example
+      - run-instrumented-container:
+          name: Run Instrumented
+          requires:
+            - Instrumentation 
       - slim-shield/hardening:
           name: Hardening
           requires:
-            - Instrumentation
+            - Run Instrumented
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:

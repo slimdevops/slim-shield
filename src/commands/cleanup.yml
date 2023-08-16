@@ -1,9 +1,0 @@
-description: >
-  This command is used to clear currently running containers.
-# What will this command do?
-# Descriptions should be short, simple, and clear.
-
-steps:
-  - run:
-      name: STOP INSTRUMENTED IMAGE
-      command: <<include(scripts/cleanup.sh)>>
