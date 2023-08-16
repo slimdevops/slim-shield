@@ -11,7 +11,7 @@ export PATH="$HOME/.slim/bin:$PATH"
 echo "export PATH=$HOME/.slim/bin:$PATH" >> "$BASH_ENV"
 
 
-slim config gen --save --token "${API_TOKEN}" --org "${ORGANIZATION_ID}"
+slim config gen --save --token "${SLIM_API_TOKEN}" --org "${SLIM_ORG_ID}"
 
 slim status build
 cat ~/.config/slim/config
