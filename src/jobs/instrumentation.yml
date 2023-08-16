@@ -1,0 +1,26 @@
+description: >
+  Sample description
+# What will this job do?
+
+docker:
+  - image: cimg/base:current
+
+parameters:
+  sourceImage:
+    type: string
+    description: "Container to instrument.eg: library/node:latest"
+
+steps:
+  - checkout
+  - setup_dependencies
+  - cli_instrument:
+      sourceImage: << parameters.sourceImage >>
+  - run:
+      name: Export ENV
+      command: cp $BASH_ENV bash.env
+  - persist_to_workspace:
+      root: .
+      paths:
+        - bash.env
+  - setup_remote_docker:
+      version: 20.10.14

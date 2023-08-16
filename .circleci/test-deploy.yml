@@ -4,7 +4,7 @@ orbs:
   # Reference your orb's jobs and commands below as they will exist when built.
   orb-tools: circleci/orb-tools@12.0
   # The orb definition is intentionally not included here. It will be injected into the pipeline.
-  slim-shield: {}
+  slim-shield: slimdevops/slim-shield@dev:<<pipeline.git.revision>>
 
 # Use this tag to ensure test jobs always run,
 # even though the downstream publish job will only run on release tags.
@@ -18,34 +18,49 @@ release-filters: &release-filters
     ignore: /.*/
   tags:
     only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
-
 jobs:
-  # Create jobs to test the commands of your orbs.
-  # You may want to add additional validation steps to ensure the commands are working as expected.
-  command-test:
-    docker:
-      - image: cimg/base:current
+  run-instrumented-container:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+      - image: cimg/node:current
     steps:
       - checkout
-      # Run your orb's commands to validate them.
-      - slim-shield/greet
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          name: Run Container
+          command: |
+            chmod +x ./src/scripts/run.sh
+            ./src/scripts/run.sh
+      - run:
+          name: Stop Container
+          command: |
+            chmod +x ./src/scripts/cleanup.sh
+            ./src/scripts/cleanup.sh
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
-      - command-test:
-          filters: *filters
-      # The orb must be re-packed for publishing, and saved to the workspace.
+      - slim-shield/instrumentation:
+          name: Instrumentation
+          sourceImage: sreejithfocaloid/node-example
+      - run-instrumented-container:
+          name: Run Instrumented
+          requires:
+            - Instrumentation 
+      - slim-shield/hardening:
+          name: Hardening
+          requires:
+            - Run Instrumented
       - orb-tools/pack:
-          filters: *release-filters
+          filters: *filters
       - orb-tools/publish:
           orb_name: slimdevops/slim-shield
           vcs_type: << pipeline.project.type >>
           pub_type: production
-          # Ensure this job requires all test jobs and the pack job.
           requires:
             - orb-tools/pack
-            - command-test
+            - Instrumentation
+            - Hardening
           context: orb-publishing
           filters: *release-filters
