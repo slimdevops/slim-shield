@@ -1,5 +1,5 @@
 description: >
-  Sample description
+  Generates an hardened image.
 # What will this job do?
 
 docker:

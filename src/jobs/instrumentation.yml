@@ -1,5 +1,5 @@
 description: >
-  Sample description
+  Generates an instrumented image.
 # What will this job do?
 
 docker:
