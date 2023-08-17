@@ -3,37 +3,35 @@
 
 [![CircleCI Build Status](https://circleci.com/gh/slimdevops/slim-shield.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/slimdevops/slim-shield) [![CircleCI Orb Version](https://badges.circleci.com/orbs/slimdevops/slim-shield.svg)](https://circleci.com/developer/orbs/orb/slimdevops/slim-shield) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/slimdevops/slim-shield/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
+# Slim Shield Circle CI Orb
+The Slim Shield automates the process of container hardening by observing the running container, understanding its requirements, and removing unnecessary components. It is designed to enhance the security of your containerized applications by implementing best practices for container hardening. The result is a more secure container image that you can access in the SlimAI portal. 
 
 
-A project template for Orbs.
+## Requirements
+- CircleCI account 
+- Slim Developer Platform account (Free at [www.slim.ai](https://www.slim.ai))
 
-This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
+## Quickstart Resources: 
+- [Blog: Node.JS Example](https://www.slim.ai/blog)
+- [GitHub Repo: Node.JS Example](https://github.com/slimdevops/harden-orb-demo)
 
-_**Edit this area to include a custom title and description.**_
+## Project Environment Variables
+Your project will need the following environment variables added to your CircleCI environment:
 
----
+- `TARGET_CONNECTOR_ID`: You can find your `CONNECTOR_ID` in the "My Registries" section of the Slim Platform (Target & Source can be same).
+- `SOURCE_CONNECTOR_ID`: You can find your `CONNECTOR_ID` in the "My Registries" section of the Slim Platform (Target & Source can be same).
+- `SLIM_ORG_ID`: Your `SLIM_ORG_ID` can be located in the "Personal Information" section, specifically under "Organizations" in the Slim Platform.
+- `SLIM_API_TOKEN`: To obtain your `SLIM_API_TOKEN`, navigate to the "Personal Information" section in the Slim Platform and then proceed to the "Tokens" subsection.  
 
-## Resources
+Sign up [here](https://portal.slim.dev/login)
 
-[CircleCI Orb Registry Page](https://circleci.com/developer/orbs/orb/slimdevops/slim-shield) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 
-[CircleCI Orb Docs](https://circleci.com/docs/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
+## About the `.circleci/config.yml` file
+The Slim.AI Orb is imported into your project here along with other `orbs`, with a organization identifier and orb slug, for example `slimdevops/slim-shield@0.0.3`. Other notable areas of the configuration include:
+- `parameters` contain CircleCI Orb meta information about the Docker image intended for hardening.
+- `jobs` defines the various jobs such as Instrumentation & Hardening that ensure the hardening process is executed within CircleCI.
+- `workflows` orchestrates the execution of jobs in a certain sequence. Publishing the image, instrumenting it using Slim CLI, running tests, hardening the image. Both the instrumented and hardened image can be seen in the SlimAI portal where you provided the TARGET_CONNECTOR_ID. 
 
-### How to Contribute
 
-We welcome [issues](https://github.com/slimdevops/slim-shield/issues) to and [pull requests](https://github.com/slimdevops/slim-shield/pulls) against this repository!
-
-### How to Publish An Update
-1. Merge pull requests with desired changes to the main branch.
-    - For the best experience, squash-and-merge and use [Conventional Commit Messages](https://conventionalcommits.org/).
-2. Find the current version of the orb.
-    - You can run `circleci orb info slimdevops/slim-shield | grep "Latest"` to see the current version.
-3. Create a [new Release](https://github.com/slimdevops/slim-shield/releases/new) on GitHub.
-    - Click "Choose a tag" and _create_ a new [semantically versioned](http://semver.org/) tag. (ex: v1.0.0)
-      - We will have an opportunity to change this before we publish if needed after the next step.
-4.  Click _"+ Auto-generate release notes"_.
-    - This will create a summary of all of the merged pull requests since the previous release.
-    - If you have used _[Conventional Commit Messages](https://conventionalcommits.org/)_ it will be easy to determine what types of changes were made, allowing you to ensure the correct version tag is being published.
-5. Now ensure the version tag selected is semantically accurate based on the changes included.
-6. Click _"Publish Release"_.
-    - This will push a new tag and trigger your publishing pipeline on CircleCI.
+## Slim Community
+For more information about configuring containers, vulnerability scans, or this orb example, check out the [SlimDevOps Community Discord](https://discord.com/invite/uBttmfyYNB), [SlimDevOps Community Forums](https://community.slim.ai/) and the [blog](https://www.slim.ai/blog/).

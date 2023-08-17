@@ -1,26 +1,32 @@
-# Orb Source
+# Slim Shield Circle CI Orb
+The Slim Shield automates the process of container hardening by observing the running container, understanding its requirements, and removing unnecessary components. It is designed to enhance the security of your containerized applications by implementing best practices for container hardening. The result is a more secure container image that you can access in the SlimAI portal. 
 
-Orbs are shipped as individual `orb.yml` files, however, to make development easier, it is possible to author an orb in _unpacked_ form, which can be _packed_ with the CircleCI CLI and published.
 
-The default `.circleci/config.yml` file contains the configuration code needed to automatically pack, test, and deploy any changes made to the contents of the orb source in this directory.
+## Requirements
+- CircleCI account 
+- Slim Developer Platform account (Free at [www.slim.ai](https://www.slim.ai))
 
-## @orb.yml
+## Quickstart Resources: 
+- [Blog: Node.JS Example](https://www.slim.ai/blog)
+- [GitHub Repo: Node.JS Example](https://github.com/slimdevops/harden-orb-demo)
 
-This is the entry point for our orb "tree", which becomes our `orb.yml` file later.
+## Project Environment Variables
+Your project will need the following environment variables added to your CircleCI environment:
 
-Within the `@orb.yml` we generally specify 4 configuration keys
+- `TARGET_CONNECTOR_ID`: You can find your `CONNECTOR_ID` in the "My Registries" section of the Slim Platform (Target & Source can be same).
+- `SOURCE_CONNECTOR_ID`: You can find your `CONNECTOR_ID` in the "My Registries" section of the Slim Platform (Target & Source can be same).
+- `SLIM_ORG_ID`: Your `SLIM_ORG_ID` can be located in the "Personal Information" section, specifically under "Organizations" in the Slim Platform.
+- `SLIM_API_TOKEN`: To obtain your `SLIM_API_TOKEN`, navigate to the "Personal Information" section in the Slim Platform and then proceed to the "Tokens" subsection.  
 
-**Keys**
+Sign up [here](https://portal.slim.dev/login)
 
-1. **version**
-    Specify version 2.1 for orb-compatible configuration `version: 2.1`
-2. **description**
-    Give your orb a description. Shown within the CLI and orb registry
-3. **display**
-    Specify the `home_url` referencing documentation or product URL, and `source_url` linking to the orb's source repository.
-4. **orbs**
-    (optional) Some orbs may depend on other orbs. Import them here.
 
-## See:
- - [Orb Author Intro](https://circleci.com/docs/2.0/orb-author-intro/#section=configuration)
- - [Reusable Configuration](https://circleci.com/docs/2.0/reusing-config)
+## About the `.circleci/config.yml` file
+The Slim.AI Orb is imported into your project here along with other `orbs`, with a organization identifier and orb slug, for example `slimdevops/slim-shield@0.0.3`. Other notable areas of the configuration include:
+- `parameters` contain CircleCI Orb meta information about the Docker image intended for hardening.
+- `jobs` defines the various jobs such as Instrumentation & Hardening that ensure the hardening process is executed within CircleCI.
+- `workflows` orchestrates the execution of jobs in a certain sequence. Publishing the image, instrumenting it using Slim CLI, running tests, hardening the image. Both the instrumented and hardened image can be seen in the SlimAI portal where you provided the TARGET_CONNECTOR_ID. 
+
+
+## Slim Community
+For more information about configuring containers, vulnerability scans, or this orb example, check out the [SlimDevOps Community Discord](https://discord.com/invite/uBttmfyYNB), [SlimDevOps Community Forums](https://community.slim.ai/) and the [blog](https://www.slim.ai/blog/).
