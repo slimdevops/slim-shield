@@ -1,6 +1,12 @@
 description: >
-  Generates an hardened image.
+  The Slim Shield automates the process of container hardening by observing the running container, understanding its requirements, and removing unnecessary components. 
+  It is designed to enhance the security of your containerized applications by implementing best practices for container hardening. 
+  The result is a more secure container image that you can access in the SlimAI portal.
 # What will this job do?
+# 1. Set up necessary dependencies for hardening. 
+# 2. Attach the current workspace. 
+# 3. Import necessary environment variables for hardening. 
+# 4. Execute hardening process through Slim CLI. 
 
 docker:
   - image: cimg/base:current

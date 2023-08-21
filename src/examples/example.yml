@@ -1,10 +1,11 @@
 description: >
-  The slim-shield is designed to enhance the security of your containerized
-  applications by implementing best practices for container hardening.
-    The environment variables SOURCE_CONNECTOR_ID, TARGET_CONNECTOR_ID, SLIM_ORG_ID and SLIM_API_TOKEN must be set for this orb to work.
-    SOURCE_CONNECTOR_ID, TARGET_CONNECTOR_ID: You can find your ID in the "My Registries" section of the Slim Platform(Both can be same).
-    SLIM_ORG_ID: Your SLIM_ORG_ID can be located in the "Personal Information" section, specifically under "Organizations" in the Slim Platform.
-    SLIM_API_TOKEN: To obtain your SLIM_API_TOKEN, navigate to the "Personal Information" section in the Slim Platform and then proceed to the "Tokens" subsection.
+  The `slim-shield` orb is engineered to bolster the security of your containerized applications
+    by integrating Slim.AI's best practices for container hardening. The hardened containers can be seen in the Slim.AI portal.
+    To ensure the orb functions correctly, certain environment variables need to be set in your CircleCI environment:
+      The environment variables SOURCE_CONNECTOR_ID, TARGET_CONNECTOR_ID, SLIM_ORG_ID and SLIM_API_TOKEN must be set in CircleCI for this orb to work.
+      `TARGET_CONNECTOR_ID` & `SOURCE_CONNECTOR_ID`: These can be found in the "My Registries" section of the Slim Platform. Note that the target and source can be the same.
+      `SLIM_ORG_ID`: Locate this in the "Personal Information" section, under "Organizations" in the Slim Platform.
+      `SLIM_API_TOKEN`: Navigate to the "Personal Information" section in the Slim Platform and proceed to the "Tokens" subsection to obtain this token.
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.

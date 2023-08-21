@@ -1,5 +1,5 @@
 description: >
-  This command setup all the dependencies required for the orb.
+  This command ensures that all required dependencies for the orb's operations are in place.
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 

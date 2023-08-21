@@ -1,5 +1,6 @@
 description: >
-  This command creates a Hardened Image.
+  This command uses the Slim.AI's hardening process to enhance the security of the provided container image.
+  By hardening, we're reducing the image's attack surface by removing unnecessary components and tightening configurations.
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 
