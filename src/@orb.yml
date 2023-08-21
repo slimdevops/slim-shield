@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  The Slim Shield enhances the security of your containerized applications by implementing Slim.AI's best practices for container hardening. 
+  The Slim Shield enhances the security of your containerized applications by implementing Slim.AI's best practices for container hardening.
   It offers capabilities like instrumentation and hardening, ensuring your containers are robust and secure against potential threats.
   The hardened container & insights from the Slim Shield processes can be viewed directly on the Slim.AI portal on the connectors page in 'My Registries'.
 

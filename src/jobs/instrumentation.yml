@@ -1,6 +1,6 @@
 description: >
   Create an instrumented version of a given container. This instrumented image is augmented with additional monitoring and debugging capabilities, enabling deeper insights during runtime.
-  The instrumented image can be viewed underneath Connectors -> My Registries. 
+  The instrumented image can be viewed underneath Connectors -> My Registries.
 # What will this job do?
 
 docker:
