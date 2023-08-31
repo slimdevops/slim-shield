@@ -1,5 +1,5 @@
 #!/bin/bash
-string="dockerhub.public/sreejithfocaloid/node-example"
+string="dockerhub.public/slimpsv/node-example"
 match=$(echo "${string}" | grep -oP '^(?:([^/]+)/)?(?:([^/]+)/)?([^@:/]+)(?:[@:](.+))?$')
 IFS='/' 
 read -r -a parts <<< "$match"

@@ -43,7 +43,7 @@ workflows:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - slim-shield/instrumentation:
           name: Instrumentation
-          sourceImage: sreejithfocaloid/node-example
+          sourceImage: slimpsv/node-example
       - run-instrumented-container:
           name: Run Instrumented
           requires:
